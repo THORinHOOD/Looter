@@ -1,31 +1,26 @@
 import 'package:angular/angular.dart';
+import 'dart:async';
 import 'package:angular_components/angular_components.dart';
 import 'components/loot_component.dart';
 import 'src/Loot.dart';
-
-final someLoots = <Loot>[
-  new Loot(11, 'Fork'),
-  new Loot(12, 'Spoon'),
-  new Loot(13, 'Paper'),
-  new Loot(14, 'Rock'),
-  new Loot(15, 'Scissors'),
-  new Loot(16, 'Knife'),
-  new Loot(17, 'Coin with clover'),
-  new Loot(18, 'Coin with cat'),
-  new Loot(19, 'Coin with hole'),
-  new Loot(20, 'Chocolate coin')
-];
+import 'src/LootService.dart';
 
 @Component(
   selector: 'my-app',
   templateUrl: 'app_component.html',
   styleUrls : const ['app_component.css'],
   directives: const [materialDirectives, CORE_DIRECTIVES, LootComponent],
+  providers: const [LootService],
 )
-class AppComponent {
+class AppComponent implements OnInit {
+  final LootService lootService;
   Loot selected;
   final title = "Your backpack";
-  List<Loot> loots = someLoots;
+  List<Loot> loots;
 
   void onSelect(Loot loot) => selected = loot;
+  Future _getLoots() async => loots = await lootService.getAll();
+
+  void ngOnInit() => _getLoots();
+  AppComponent(this.lootService);
 }
