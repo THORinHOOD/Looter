@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+
+<ul class="loots">
+    <li *ngFor="let loot of loots"
+        (click)="onSelect(loot)"
+        [class.selected]="loot === selected">
+        <span class="badge">{{loot.getCount()}}</span> {{loot.getName()}}
+    </li>
+</ul>
+
+<my-loot [loot]="selected"></my-loot>
