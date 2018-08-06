@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../src/Loot.dart';
+import '../../src/Loot.dart';
 
 @Component
 (
